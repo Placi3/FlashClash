@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Croquetas Retro</title>
+    <style>
+
+
+
+        @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Press+Start+2P&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #1a1a2e;
+            background-image: 
+                linear-gradient(63deg, #2d2d44 5%, transparent 5%),
+                linear-gradient(117deg, #2d2d44 5%, transparent 5%),
+                linear-gradient(63deg, transparent 95%, #2d2d44 95%),
+                linear-gradient(117deg, transparent 95%, #2d2d44 95%);
+            background-size: 40px 40px;
+            background-position: 0 0, 0 0, 20px 20px, 20px 20px;
+            color: #fff;
+            font-family: 'Bungee', cursive;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .menu-container {
+            background-color: #2a1b3d;
+            background-image: 
+                linear-gradient(rgba(90, 60, 120, 0.4) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(90, 60, 120, 0.4) 1px, transparent 1px);
+            background-size: 40px 20px;
+            border: 3px solid #ff00ff;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 0 20px #ff00ff, 0 0 40px rgba(255, 0, 255, 0.5),
+                        0 0 80px rgba(0, 100, 255, 0.6) inset;
+            position: relative;
+            overflow: hidden;
+        }
+/* BOTONES IDIOMA */
+        .language-switcher {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            gap: 8px;
+            z-index: 9999;
+        }
+
+        .lang-btn {
+            background: #1a1a2e;
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7em;
+            padding: 6px 10px;
+            cursor: pointer;
+            border-radius: 6px;
+            box-shadow: 0 0 8px #00ffff;
+        }
+
+        .lang-btn.active {
+            background: #ff00ff;
+            color: #fff;
+            border-color: #ff00ff;
+        }
+
+
+        /* Efecto de sombra entre ladrillos */
+        .menu-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(to bottom, rgba(0,0,0,0.2) 1px, transparent 1px),
+                linear-gradient(to right, rgba(0,0,0,0.2) 1px, transparent 1px);
+            background-size: 40px 20px;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Efecto de desenfoque para mejorar la legibilidad */
+        .menu-container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+        
+        .logo-container {
+    text-align: center;
+    margin-top: 60px;   /* 👈 BAJA EL LOGO */
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+        
+        .logo-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 5px auto;
+            filter: drop-shadow(0 0 10px #c678dd) drop-shadow(0 0 20px #c678dd);
+            animation: logo-glow 3s infinite alternate;
+        }
+        
+        .menu-title {
+            text-align: center;
+            font-size: 3em;
+            margin: 100px 0 40px 0;
+            text-transform: uppercase;
+            color: #ff6ec7;
+            letter-spacing: 2px;
+            font-family: 'Press Start 2P', cursive;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .menu-title span {
+            display: inline-block;
+        }
+        
+        .letter-m, .letter-n {
+            text-shadow: 0 0 10px #ff073a, 0 0 20px #ff073a;
+            animation: steady-glow 3s infinite alternate;
+        }
+        
+        .letter-e {
+            text-shadow: 0 0 10px #ff073a, 0 0 20px #ff073a;
+            animation: broken-neon-e 6s infinite;
+        }
+        
+        .letter-u {
+            text-shadow: 0 0 10px #ff073a, 0 0 20px #ff073a;
+            animation: broken-neon-u 7s infinite;
+        }
+        
+        .menu-section {
+            margin-bottom: 25px;
+            border-bottom: 2px dashed #00ffff;
+            padding-bottom: 15px;
+            position: relative;
+        }
+        
+        .section-title {
+    font-size: 1.5em;
+    font-weight: 400; /* menos grosor */
+    color: #00ffff;
+    text-shadow: 0 0 2px #00ffff; /* menos glow */
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+
+        
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            position: relative;
+        }
+        
+        .item-name {
+            color: #39ff14;
+            text-shadow: 0 0 5px #39ff14;
+        }
+        
+        .item-price {
+            color: #ffdf00;
+            text-shadow: 0 0 5px #ffdf00;
+        }
+        
+        .logo-bottom-container {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+        }
+        
+        .logo-bottom {
+            max-width: 60%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 0 10px #ffdf00) drop-shadow(0 0 20px #ffdf00);
+            animation: logo-bottom-glow 3s infinite alternate;
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            font-family: 'Bungee', cursive;
+            font-size: 0.7em;
+            color: #ffdf00;
+            text-align: center;
+            text-shadow: 0 0 5px #ffdf00;
+            opacity: 0.9;
+        }
+        
+        .company-symbols {
+            font-size: 1.2em;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        
+        /* Animaciones para el efecto de neón roto más realista */
+        @keyframes broken-neon-e {
+            0%, 15% {
+                text-shadow: 0 0 10px #ff073a, 0 0 20px #ff073a;
+                opacity: 1;
+            }
+            16%, 19% {
+                text-shadow: 0 0 2px #ff073a, 0 0 4px #ff073a;
+                opacity: 0.5;
+            }
+            20%, 22% {
+                text-shadow: 0 0 10px #ff073a, 0 0 20px #ff073a;
+                opacity: 1;
+            }
+            23%, 25% {
+                text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                opacity: 0.2;
+            }
+            26%, 45% {
+                text-shadow: 0 0 10px #ff073a, 0 0 20px #ff073a;
+                opacity: 1;
+            }
+            46%, 48% {
+                text-shadow: 0 0 5px #ff073a, 0 0 10px #ff073a;
+                opacity: 0.7;
+            }
+            49%, 51% {
+                text-shadow: 0 0 10px #ff073a, 0 0 20px #ff073a;
+                opacity: 1;
+            }
+            52%, 54% {
+                text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                opacity: 0.1;
+            }
+            55%, 57% {
+                text-shadow: 0 0 3px #ff073a, 0 0 6px #ff073a;
+                opacity: 0.4;
+            }
+            58%, 65% {
+                text-shadow: 0 0 10px #ff073a, 0 0 20px #ff073a;
+                opacity: 1;
+            }
+            66%, 68% {
+                text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                opacity: 0.1;
+            }
+            69%, 72% {
+                text-shadow: 0 0 7px #ff073a, 0 0 14px #ff073a;
+                opacity: 0.8;
+            }
+            73%, 100% {
+                text-shadow: 0 0 10px #ff073a, 0 0 20px #ff073a;
+                opacity: 1;
+            }
+        }
+        
+        @keyframes broken-neon-u {
+            0%, 20% {
+                text-shadow: 0 0 10px #ff073a, 0 0 20px #ff073a;
+                opacity: 1;
+            }
+            21%, 23% {
+                text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                opacity: 0.1;
+            }
+            24%, 26% {
+                text-shadow: 0 0 4px #ff073a, 0 0 8px #ff073a;
+                opacity: 0.6;
+            }
+            27%, 35% {
+                text-shadow: 0 0 10px #ff073a, 0 0 20px #ff073a;
+                opacity: 1;
+            }
+            36%, 38% {
+                text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                opacity: 0.1;
+            }
+            39%, 41% {
+                text-shadow: 0 0 2px #ff073a, 0 0 4px #ff073a;
+                opacity: 0.4;
+            }
+            42%, 44% {
+                text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                opacity: 0.1;
+            }
+            45%, 60% {
+                text-shadow: 0 0 10px #ff073a, 0 0 20px #ff073a;
+                opacity: 1;
+            }
+            61%, 63% {
+                text-shadow: 0 0 6px #ff073a, 0 0 12px #ff073a;
+                opacity: 0.7;
+            }
+            64%, 66% {
+                text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                opacity: 0.1;
+            }
+            67%, 69% {
+                text-shadow: 0 0 3px #ff073a, 0 0 6px #ff073a;
+                opacity: 0.5;
+            }
+            70%, 72% {
+                text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                opacity: 0.1;
+            }
+            73%, 75% {
+                text-shadow: 0 0 8px #ff073a, 0 0 16px #ff073a;
+                opacity: 0.9;
+            }
+            76%, 100% {
+                text-shadow: 0 0 10px #ff073a, 0 0 20px #ff073a;
+                opacity: 1;
+            }
+        }
+        
+        @keyframes steady-glow {
+            0%, 100% {
+                text-shadow: 0 0 10px #ff073a, 0 0 20px #ff073a;
+                opacity: 0.9;
+            }
+            50% {
+                text-shadow: 0 0 8px #ff073a, 0 0 15px #ff073a;
+                opacity: 1;
+            }
+        }
+        
+        @keyframes logo-glow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 10px #c678dd) drop-shadow(0 0 20px #c678dd); 
+            }
+            50% { 
+                filter: drop-shadow(0 0 15px #c678dd) drop-shadow(0 0 30px #c678dd) brightness(1.1); 
+            }
+        }
+        
+        @keyframes logo-bottom-glow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 10px #ffdf00) drop-shadow(0 0 20px #ffdf00); 
+            }
+            50% { 
+                filter: drop-shadow(0 0 15px #ffdf00) drop-shadow(0 0 30px #ffdf00) brightness(1.1); 
+            }
+        }
+        
+        .section-title {
+            animation: blink 2s infinite alternate;
+        }
+        
+        @keyframes blink {
+    0%, 100% {
+        opacity: 0.95;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+        
+        /* Responsive para móviles */
+        @media (max-width: 768px) {
+            .menu-title {
+                font-size: 2.2em;
+                gap: 3px;
+            }
+            
+            .letter-m, .letter-n, .letter-e, .letter-u {
+                text-shadow: 0 0 5px #ff073a, 0 0 10px #ff073a;
+            }
+            
+            @keyframes broken-neon-e {
+                0%, 15% {
+                    text-shadow: 0 0 5px #ff073a, 0 0 10px #ff073a;
+                    opacity: 1;
+                }
+                16%, 19% {
+                    text-shadow: 0 0 1px #ff073a, 0 0 2px #ff073a;
+                    opacity: 0.5;
+                }
+                20%, 22% {
+                    text-shadow: 0 0 5px #ff073a, 0 0 10px #ff073a;
+                    opacity: 1;
+                }
+                23%, 25% {
+                    text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                    opacity: 0.2;
+                }
+                26%, 45% {
+                    text-shadow: 0 0 5px #ff073a, 0 0 10px #ff073a;
+                    opacity: 1;
+                }
+                46%, 48% {
+                    text-shadow: 0 0 3px #ff073a, 0 0 5px #ff073a;
+                    opacity: 0.7;
+                }
+                49%, 51% {
+                    text-shadow: 0 0 5px #ff073a, 0 0 10px #ff073a;
+                    opacity: 1;
+                }
+                52%, 54% {
+                    text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                    opacity: 0.1;
+                }
+                55%, 57% {
+                    text-shadow: 0 0 2px #ff073a, 0 0 3px #ff073a;
+                    opacity: 0.4;
+                }
+                58%, 65% {
+                    text-shadow: 0 0 5px #ff073a, 0 0 10px #ff073a;
+                    opacity: 1;
+                }
+                66%, 68% {
+                    text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                    opacity: 0.1;
+                }
+                69%, 72% {
+                    text-shadow: 0 0 4px #ff073a, 0 0 7px #ff073a;
+                    opacity: 0.8;
+                }
+                73%, 100% {
+                    text-shadow: 0 0 5px #ff073a, 0 0 10px #ff073a;
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes broken-neon-u {
+                0%, 20% {
+                    text-shadow: 0 0 5px #ff073a, 0 0 10px #ff073a;
+                    opacity: 1;
+                }
+                21%, 23% {
+                    text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                    opacity: 0.1;
+                }
+                24%, 26% {
+                    text-shadow: 0 0 2px #ff073a, 0 0 4px #ff073a;
+                    opacity: 0.6;
+                }
+                27%, 35% {
+                    text-shadow: 0 0 5px #ff073a, 0 0 10px #ff073a;
+                    opacity: 1;
+                }
+                36%, 38% {
+                    text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                    opacity: 0.1;
+                }
+                39%, 41% {
+                    text-shadow: 0 0 1px #ff073a, 0 0 2px #ff073a;
+                    opacity: 0.4;
+                }
+                42%, 44% {
+                    text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                    opacity: 0.1;
+                }
+                45%, 60% {
+                    text-shadow: 0 0 5px #ff073a, 0 0 10px #ff073a;
+                    opacity: 1;
+                }
+                61%, 63% {
+                    text-shadow: 0 0 3px #ff073a, 0 0 6px #ff073a;
+                    opacity: 0.7;
+                }
+                64%, 66% {
+                    text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                    opacity: 0.1;
+                }
+                67%, 69% {
+                    text-shadow: 0 0 2px #ff073a, 0 0 3px #ff073a;
+                    opacity: 0.5;
+                }
+                70%, 72% {
+                    text-shadow: 0 0 0px transparent, 0 0 0px transparent;
+                    opacity: 0.1;
+                }
+                73%, 75% {
+                    text-shadow: 0 0 4px #ff073a, 0 0 8px #ff073a;
+                    opacity: 0.9;
+                }
+                76%, 100% {
+                    text-shadow: 0 0 5px #ff073a, 0 0 10px #ff073a;
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes steady-glow {
+                0%, 100% {
+                    text-shadow: 0 0 5px #ff073a, 0 0 10px #ff073a;
+                    opacity: 0.9;
+                }
+                50% {
+                    text-shadow: 0 0 4px #ff073a, 0 0 8px #ff073a;
+                    opacity: 1;
+                }
+            }
+            
+            .section-title {
+                font-size: 1.5em;
+                text-shadow: 0 0 3px #00ffff, 0 0 5px #00ffff;
+            }
+            
+            .logo-image {
+                max-width: 80%;
+            }
+            
+            .logo-bottom {
+                max-width: 50%;
+            }
+            
+            .copyright {
+                font-size: 0.7em;
+                margin-top: 30px;
+            }
+            
+            .menu-item {
+                font-size: 1em;
+            }
+            
+            .menu-container {
+                padding: 20px;
+                background-size: 30px 15px;
+            }
+            
+            .menu-container::before {
+                background-size: 30px 15px;
+            }
+            
+            body {
+                background-size: 30px 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .menu-title {
+                font-size: 1.8em;
+                margin: 80px 0 30px 0;
+                gap: 2px;
+            }
+            
+            .section-title {
+                font-size: 1.3em;
+                text-shadow: 0 0 2px #00ffff, 0 0 4px #00ffff;
+            }
+            
+            .logo-image {
+                max-width: 70%;
+            }
+            
+            .logo-bottom {
+                max-width: 40%;
+            }
+            
+            .copyright {
+                font-size: 0.7em;
+                margin-top: 30px;
+            }
+            
+            body {
+                padding: 10px;
+                background-size: 25px 25px;
+            }
+            
+            .menu-container {
+                background-size: 25px 12px;
+                padding: 15px;
+            }
+            
+            .menu-container::before {
+                background-size: 25px 12px;
+            }
+            
+            .menu-section {
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+            }
+            
+            .logo-bottom-container {
+                margin-top: 20px;
+                padding-top: 15px;
+            }
+        }
+
+#game-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+
+.game-box {
+    background: #1a1a2e;
+    border: 3px solid #00ffff;
+    box-shadow: 0 0 20px #00ffff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+canvas {
+    background: #000;
+    margin: 15px 0;
+}
+
+
+
+/* ===== PANTALLA JUEGO SNAKE ===== */
+#snake-screen {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    touch-action: none;
+    z-index: 99999;
+}
+
+/* HUD superior */
+.snake-top {
+    background: linear-gradient(
+        180deg,
+        #1a1a2e 0%,
+        #16213e 50%,
+        #0f3460 100%
+    );
+    border-bottom: 3px solid #00ffff;
+    box-shadow: 0 4px 15px rgba(0, 255, 255, 0.4);
+}
+
+.snake-top span,
+.snake-top div {
+    text-shadow: 0 0 6px currentColor;
+}
+
+/* ===== HUD ARCADE ===== */
+.snake-top span {
+    color: #00ff00;
+    font-size: 0.7em;
+    text-shadow: 0 0 8px #00ff00;
+    white-space: nowrap;
+}
+
+.snake-score {
+    text-align: right;
+}
+
+.snake-record {
+    text-align: center;
+}
+
+
+#player-name-hud {
+    text-align: left;
+}
+
+/* CANVAS = ZONA DE JUEGO */
+#snake-canvas {
+    flex: 1 1 auto;
+    width: 100%;
+    background: #000;
+    display: block;
+}
+
+
+#game-over {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.85);
+    z-index: 999999;
+}
+
+
+
+.game-over-box {
+    text-align: center;
+    background: #1a1a2e;
+    border: 3px solid #ff00ff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #ff00ff;
+}
+
+.game-over-title {
+    font-family: 'Press Start 2P', cursive;
+    color: #ff004f;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #ff004f;
+}
+
+#name-screen {
+    position: fixed;   /* 👈 CLAVE */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100001;
+}
+
+
+#player-name {
+    padding: 10px;
+    font-family: 'Press Start 2P', cursive;
+    width: 200px;
+    text-align: center;
+}
+
+.snake-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+
+    background: linear-gradient(
+        180deg,
+        #1a1a2e 0%,
+        #16213e 50%,
+        #0f3460 100%
+    );
+
+    border-bottom: 3px solid #00ff00;
+    box-shadow: 0 4px 15px rgba(0, 255, 0, 0.4);
+
+    font-family: 'Press Start 2P', cursive;
+}
+
+
+/* ===== NUEVO RECORD ===== */
+#new-record {
+    margin: 15px 0;
+    font-family: 'Press Start 2P', cursive;
+    color: #00ff00;
+    font-size: 1em;
+    text-shadow: 0 0 10px #00ff00;
+    animation: blinkRecord 1.2s infinite alternate;
+}
+
+@keyframes blinkRecord {
+    from { opacity: 0.6; }
+    to   { opacity: 1; }
+}
+
+/* ===== BOTÓN REINTENTAR GRANDE ===== */
+.retry-btn {
+    font-size: 1.6em;
+    padding: 15px 30px;
+    box-shadow: 0 0 15px #ff00ff;
+}
+
+.record-label {
+    font-size: 0.6em;
+    margin-top: 4px;
+    text-align: center;
+    color: #00ff00;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 0 0 6px #00ff00;
+    opacity: 0.9;
+}
+
+/* ===== BLOQUEO SCROLL PARA MODO JUEGO ===== */
+body.no-scroll {
+    overflow: hidden;
+    touch-action: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+/* ===== CANVAS FULLSCREEN ===== */
+#snake-canvas {
+    flex: 1;
+    width: 100%;
+    background: #000;
+}
+
+/* ===== PLAY CENTRAL ===== */
+#play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+#play-btn {
+    pointer-events: auto;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 4px solid #00ffff;
+    background: rgba(0,0,0,0.8);
+    color: #00ffff;
+    font-size: 2.5em;
+    box-shadow: 0 0 20px #00ffff;
+}
+
+/* ===== BOTÓN PAUSA ===== */
+#pause-btn {
+    position: absolute;
+    top: 70px;
+    right: 15px;
+    display: none;
+    background: #1a1a2e;
+    border: 2px solid #ff00ff;
+    color: #ff00ff;
+    font-size: 1em;
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #ff00ff;
+}
+
+/* ===== MODAL PAUSA ===== */
+#pause-modal {
+    position: absolute;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.85);
+}
+
+.pause-box {
+    background: #1a1a2e;
+    border: 3px solid #00ffff;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 20px #00ffff;
+}
+
+.pause-score {
+    font-family: 'Press Start 2P', cursive;
+    color: #00ff00;
+    margin-bottom: 20px;
+}
+
+/* ===== GAME OVER BUTTONS ===== */
+.game-over-actions {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+/* Botón retro base */
+.arcade-btn {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.1em;
+    padding: 14px 22px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #000;
+    text-transform: uppercase;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.arcade-btn:hover {
+    transform: scale(1.05);
+}
+
+/* REINTENTAR */
+.retry-btn {
+    border: 3px solid #00ff00;
+    color: #00ff00;
+    box-shadow: 0 0 12px #00ff00;
+}
+
+.retry-btn:hover {
+    box-shadow: 0 0 20px #00ff00;
+}
+
+/* MENÚ */
+.menu-exit-btn {
+    border: 3px solid #ff004f;
+    color: #ff004f;
+    box-shadow: 0 0 12px #ff004f;
+}
+
+.menu-exit-btn:hover {
+    box-shadow: 0 0 20px #ff004f;
+}
+
+
+/* ===== ICONOS ARCADE ===== */
+.arcade-icon {
+    width: 0;
+    height: 0;
+    margin: 0 auto;
+}
+
+/* Flecha derecha (REINTENTAR) */
+.icon-play {
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 30px solid #00ff00;
+}
+
+/* Flecha izquierda (MENÚ) */
+.icon-menu {
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-right: 30px solid #ff004f;
+}
+
+/* Botones más grandes */
+.arcade-btn {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+/* SCORE GAME OVER */
+.game-over-score {
+    margin-top: 25px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9em;
+    color: #00ffff;
+    text-shadow: 0 0 8px #00ffff;
+}
+
+.info-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000000;
+}
+
+.info-box {
+    background: #1a1a2e;
+    border: 3px solid #00ffff;
+    padding: 25px;
+    border-radius: 15px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 0 20px #00ffff;
+    font-family: 'Press Start 2P', cursive;
+    position: relative;
+}
+
+.info-box h3 {
+    font-size: 0.9em;
+    color: #00ffff;
+    margin-bottom: 20px;
+}
+
+.info-box p {
+    color: #00ff00;
+    font-size: 1em;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    cursor: pointer;
+    color: #ff004f;
+    font-size: 1.2em;
+}
+
+/* TOP 3 */
+#top3-list {
+    list-style: none;
+    padding: 0;
+}
+
+#top3-list li {
+    margin: 10px 0;
+    font-size: 0.8em;
+}
+
+.gold { color: gold; }
+.silver { color: silver; }
+.bronze { color: #cd7f32; }
+
+/* ===== INTRO SCREEN ===== */
+#intro-screen {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100002;
+    overflow: hidden;
+}
+
+/* Fondo animado de serpientes */
+.intro-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("fondo.jpg");
+    background-size: cover;
+    animation: bgMove 20s linear infinite;
+    opacity: 0.35;
+}
+
+/* Movimiento fondo */
+@keyframes bgMove {
+    from { background-position: 0 0; }
+    to   { background-position: 1000px 600px; }
+}
+
+/* Contenido centrado */
+.intro-content {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Título */
+.intro-title {
+    color: #00ff00;
+    font-size: 2em;
+    margin-bottom: 25px;
+    text-shadow: 0 0 15px #00ff00;
+}
+
+/* Logo */
+.intro-logo {
+    width: 180px;
+    max-width: 80%;
+    margin-bottom: 30px;
+    filter: drop-shadow(0 0 20px #00ffff);
+}
+
+/* Texto tocar */
+.intro-touch {
+    color: #ffffff;
+    font-size: 0.7em;
+    animation: blinkIntro 1.2s infinite alternate;
+    text-shadow: 0 0 10px #ffffff;
+}
+
+/* Parpadeo */
+@keyframes blinkIntro {
+    from { opacity: 0.4; }
+    to   { opacity: 1; }
+}
+
+/* ===== CANVAS FONDO INTRO ===== */
+#intro-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background:
+        repeating-linear-gradient(
+            45deg,
+            #050505,
+            #050505 10px,
+            #070707 10px,
+            #070707 20px
+        );
+}
+
+/* El contenido va por encima */
+.intro-content {
+    position: relative;
+    z-index: 2;
+}
+
+    </style>
+</head>
+<body>
+
+<div class="menu-container">
+        
+<!-- BOTONES -->
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="setLanguage('es')">ES</button>
+        <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+    </div>   
+
+<div class="logo-container">
+            <img src="logo.jpg" alt="CROQUETRUCK - LA FORTALEZA" class="logo-image">
+</div>
+        
+        <h1 class="menu-title">
+            <span class="letter-m">M</span>
+            <span class="letter-e">E</span>
+            <span class="letter-n">N</span>
+            <span class="letter-u">Ú</span>
+        </h1>
+        
+        <div class="menu-section">
+            <h2 class="section-title"
+              data-es="Croquetas de la Casa (preguntad por las disponibles)"
+              data-en="Our croquettes (Ask about the available ones)">
+            </h2>
+
+            <div class="menu-item">
+                <span class="item-name" 
+                      data-es="Jamón Serrano" 
+                      data-en="Serrano Ham">
+                </span>
+            <span class="item-price"></span>
+            </div>
+            <div class="menu-item">
+                <span class="item-name" 
+                      data-es="Pollo" 
+                      data-en="Chicken">
+                </span>
+            <span class="item-price"></span>
+            </div>
+            <div class="menu-item">
+                 <span class="item-name" 
+                       data-es="Boletus" 
+                       data-en="Boletus Mushrooms">
+                 </span>
+            <span class="item-price"></span>
+            </div>
+            <div class="menu-item">
+                 <span class="item-name" 
+                       data-es="Morcilla" 
+                       data-en="Black pudding">
+                 </span>
+            <span class="item-price"></span>
+            </div>
+            <div class="menu-item">
+                 <span class="item-name" 
+                       data-es="Queso con trufa" 
+                       data-en="Cheese with Truffle">
+                 </span>
+            <span class="item-price"></span>
+            </div>
+            <div class="menu-item">
+                 <span class="item-name" 
+                       data-es="Rabo de toro" 
+                       data-en="Oxtail">
+                 </span>
+            <span class="item-price"></span>
+            </div>
+           <div class="menu-item">
+                <span class="item-name" 
+                      data-es="Zanahoria con jengibre y cúrcuma" 
+                      data-en="Carrot with Ginger and Turmeric">
+                </span>
+           <span class="item-price"></span>
+           </div>
+           <div class="menu-item">
+                <span class="item-name" 
+                      data-es="Jamón ibérico de bellota" 
+                      data-en="Acorn-fed Iberian Ham">
+                </span>
+           <span class="item-price"></span>
+           </div>
+        </div>
+        
+        
+<!-- COMBOS -->
+    <div class="menu-section">
+        <h2 class="section-title" data-es="Combos" data-en="Combos"></h2>
+
+        <div class="menu-item"><span class="item-name" data-es="2 Croquetas" data-en="2 Croquettes"></span><span class="item-price">4€</span></div>
+        <div class="menu-item"><span class="item-name" data-es="6 Croquetas" data-en="6 Croquettes"></span><span class="item-price">7.5€</span></div>
+        <div class="menu-item"><span class="item-name" data-es="10 Croquetas" data-en="10 Croquettes"></span><span class="item-price">17€</span></div>
+    </div>
+
+
+
+
+<!-- DEGUSTACIÓN -->
+    <div class="menu-section">
+        <h2 class="section-title"
+            data-es="Degustación especial y exclusiva"
+            data-en="Special and Exclusive Tasting">
+        </h2>
+
+        <div class="menu-item">
+            <span class="item-name"
+                  data-es="Embutido de toro de Libia (salchichón y chorizo)"
+                  data-en="Libyan Bull Cured Sausages (salchichón and chorizo)">
+            </span>
+            <span class="item-price">6.50€</span>
+        </div>
+    </div>
+        
+        
+     
+<!-- PARA ABRIR BOCA -->
+    <div class="menu-section">
+        <h2 class="section-title" data-es="Para abrir boca" data-en="Small bites"></h2>
+
+        <div class="menu-item"><span class="item-name" data-es="Bolsa de patatas fritas" data-en="Bag of crisps"></span><span class="item-price">1.50€</span></div>
+        <div class="menu-item"><span class="item-name" data-es="Ración de almendras" data-en="Portion of almonds"></span><span class="item-price">2.50€</span></div>
+        <div class="menu-item"><span class="item-name" data-es="Ración de patatas fritas" data-en="Fries"></span><span class="item-price">3€</span></div>
+        <div class="menu-item"><span class="item-name" data-es="Media ración de patatas bravas" data-en="Half Portion of patatas bravas"></span><span class="item-price">4€</span></div>
+        <div class="menu-item"><span class="item-name" data-es="Ración de patatas bravas" data-en="Portion of patatas bravas"></span><span class="item-price">6€</span></div>        
+        <div class="menu-item"><span class="item-name" data-es="Torrezno de Soria con patatas" data-en="Soria-style pork belly with fries"></span><span class="item-price">7.50€</span></div>
+    </div>
+
+
+<!-- BEBIDAS -->
+    <div class="menu-section">
+        <h2 class="section-title" data-es="Bebidas" data-en="Drinks"></h2>
+
+        <div class="menu-item"><span class="item-name" data-es="Agua" data-en="Water"></span><span class="item-price">1€</span></div>
+        <div class="menu-item"><span class="item-name" data-es="Refrescos" data-en="Soft Drinks"></span><span class="item-price">2€</span></div>
+        <div class="menu-item"><span class="item-name" data-es="Chato de vino de Jumilla" data-en="Small glass of Jumilla wine"></span><span class="item-price">2.50€</span></div>        
+        <div class="menu-item"><span class="item-name" data-es="Tercio de cerveza" data-en="Beer (33cl)"></span><span class="item-price">2.50€</span></div>
+        <div class="menu-item"><span class="item-name" data-es="Tercio de cerveza sin gluten" data-en="Gluten-free beer (33cl)"></span><span class="item-price">2.50€</span></div>
+        <div class="menu-item"><span class="item-name" data-es="Tercio de cerveza reserva" data-en="Reserve beer (33cl)"></span><span class="item-price">3€</span></div>
+    </div>
+
+
+<div style="text-align:center; margin:30px 0;">
+    <button id="open-game"
+            class="lang-btn"
+            data-es="🎮 Juega mientras esperas"
+            data-en="🎮 Play while you wait">
+    </button>
+</div>
+
+   
+        <div class="logo-bottom-container">
+        <img src="logo abajo.jpg" alt="CROQUETRUCK" class="logo-bottom">
+        <div class="copyright" id="copyright-text"
+             data-es="© 2025 Croquetruck La Fortaleza. Todos los derechos reservados."
+             data-en="© 2025 Croquetruck La Fortaleza. All rights reserved.">
+            <span id="current-year"></span>
+        </div>
+    </div>
+    </div>
+<script>
+     const elements = document.querySelectorAll('[data-es]');
+    const buttons = document.querySelectorAll('.lang-btn');
+
+    function setLanguage(lang) {
+        elements.forEach(el => {
+            el.textContent = el.getAttribute(`data-${lang}`);
+        });
+
+        // Actualizar botones activos
+        buttons.forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`[onclick="setLanguage('${lang}')"]`).classList.add('active');
+    }
+
+    // Insertar el año actual en el span con id="current-year"
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+
+    // Iniciar en español
+    setLanguage('es');
+</script>
+
+
+
+<!-- INTRO NOMBRE -->
+<div id="name-screen" style="display: none;">
+    <div class="game-over-box">
+        <h2 class="game-over-title">TU NOMBRE</h2>
+        <input id="player-name" type="text" placeholder="Escribe tu nombre" />
+        <br><br>
+        <button id="name-ok" class="lang-btn">OK</button>
+    </div>
+</div>
+
+
+<!-- ===== INTRO JUEGO ===== -->
+<div id="intro-screen">
+    <canvas id="intro-canvas"></canvas>
+
+    <div class="intro-content">
+        <h1 class="intro-title">CROQUESNAKE</h1>
+        <img src="logo-snake.png" alt="CroqueSnake" class="intro-logo">
+        <div class="intro-touch">
+            TOCA LA PANTALLA PARA COMENZAR
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- ===== JUEGO SNAKE ===== -->
+<div id="snake-screen">
+
+    <!-- HUD superior -->
+    <div class="snake-top">
+    <span id="player-name-hud">PLAYER</span>
+
+    <span class="snake-record">
+
+    👑 <span id="record-name">---</span> 
+    <span id="record-score">0</span>
+    <div class="record-label">RECORD</div>
+</span>
+
+
+    <span class="snake-score">
+        SCORE: <span id="snake-score">0</span>
+    </span>
+</div>
+
+
+    <!-- Zona del juego -->
+    <canvas id="snake-canvas"></canvas>
+
+   <!-- BOTÓN PLAY CENTRAL -->
+<div id="play-overlay">
+    <button id="play-btn">▶</button>
+</div>
+
+<!-- BOTÓN PAUSA -->
+<button id="pause-btn">⏸</button>
+
+<!-- MODAL PAUSA -->
+<div id="pause-modal">
+    <div class="pause-box">
+        <div class="pause-score">
+            SCORE: <span id="pause-score">0</span>
+        </div>
+
+        <button id="resume-btn" class="lang-btn">▶ PLAY</button>
+        <button id="menu-btn" class="lang-btn">⬅ VOLVER</button>
+    </div>
+</div>
+ 
+
+
+
+
+</div>
+
+
+<div id="game-over">
+    <div class="game-over-box">
+        <h2 class="game-over-title">GAME OVER</h2>
+
+        <!-- MENSAJE NUEVO RECORD -->
+        <div id="new-record" style="display:none;">
+            🎉 NUEVO RÉCORD 🎉
+        </div>
+<div class="game-over-actions">
+    <button id="retry-btn" class="arcade-btn retry-btn">
+        <div class="arcade-icon icon-play"></div>
+    </button>
+
+    <button id="exit-menu-btn" class="arcade-btn menu-exit-btn">
+        <div class="arcade-icon icon-menu"></div>
+    </button>
+</div>
+
+<div class="game-over-score">
+    SCORE: <span id="final-score">0</span>
+</div>
+
+
+        
+    </div>
+</div>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+const openGameBtn = document.getElementById("open-game");
+const snakeScreen = document.getElementById("snake-screen");
+const introScreen = document.getElementById("intro-screen");
+/* ===== FONDO RETRO CROQUESNAKE ===== */
+const introCanvas = document.getElementById("intro-canvas");
+const ictx = introCanvas.getContext("2d");
+
+let snakes = [];
+
+function resizeIntroCanvas() {
+    introCanvas.width = window.innerWidth;
+    introCanvas.height = window.innerHeight;
+}
+resizeIntroCanvas();
+window.addEventListener("resize", resizeIntroCanvas);
+
+// Crear serpientes pixeladas
+function createSnake() {
+    const length = Math.floor(Math.random() * 8) + 6;
+    const size = 10;
+
+    return {
+        x: Math.random() * introCanvas.width,
+        y: Math.random() * introCanvas.height,
+        dx: (Math.random() > 0.5 ? 1 : -1) * (0.3 + Math.random() * 0.4),
+        dy: (Math.random() > 0.5 ? 1 : -1) * (0.2 + Math.random() * 0.3),
+        length,
+        size,
+        color: Math.random() > 0.5 ? "#00ff00" : "#00ffff"
+    };
+}
+
+// Inicializar varias serpientes
+for (let i = 0; i < 18; i++) {
+    snakes.push(createSnake());
+}
+
+function drawIntroBackground() {
+    ictx.clearRect(0, 0, introCanvas.width, introCanvas.height);
+
+    snakes.forEach(s => {
+        for (let i = 0; i < s.length; i++) {
+            ictx.fillStyle = s.color;
+            ictx.fillRect(
+                s.x - i * s.size,
+                s.y,
+                s.size,
+                s.size
+            );
+        }
+
+        s.x += s.dx;
+        s.y += s.dy;
+
+        // Reaparecer por el otro lado
+        if (s.x > introCanvas.width + 50) s.x = -50;
+        if (s.x < -50) s.x = introCanvas.width + 50;
+        if (s.y > introCanvas.height + 50) s.y = -50;
+        if (s.y < -50) s.y = introCanvas.height + 50;
+    });
+
+    requestAnimationFrame(drawIntroBackground);
+}
+
+const playOverlay = document.getElementById("play-overlay");
+const playBtn = document.getElementById("play-btn");
+const pauseBtn = document.getElementById("pause-btn");
+
+const pauseModal = document.getElementById("pause-modal");
+const resumeBtn = document.getElementById("resume-btn");
+const menuBtn = document.getElementById("menu-btn");
+const nameHud = document.getElementById("player-name-hud");
+
+
+
+
+
+
+const canvas = document.getElementById("snake-canvas");
+const ctx = canvas.getContext("2d");
+
+const gameOverScreen = document.getElementById("game-over");
+const retryBtn = document.getElementById("retry-btn");
+const exitMenuBtn = document.getElementById("exit-menu-btn");
+
+retryBtn.onclick = () => {
+    gameOverScreen.style.display = "none";
+
+    stopGame();
+    initGame();
+    draw();
+
+    playOverlay.style.display = "flex";
+    pauseBtn.style.display = "none";
+};
+
+exitMenuBtn.onclick = () => {
+    gameOverScreen.style.display = "none";
+    snakeScreen.style.display = "none";
+
+    stopGame();
+
+    playOverlay.style.display = "none";
+    pauseBtn.style.display = "none";
+
+    document.body.classList.remove("no-scroll");
+};
+
+
+/* ===== DESACTIVAR SCROLL TÁCTIL DURANTE EL JUEGO ===== */
+snakeScreen.addEventListener("touchmove", e => {
+    if (snakeScreen.style.display === "flex") {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+
+/* ===== CONTROL TÁCTIL POR DESLIZAMIENTO ===== */
+let touchStartX = 0;
+let touchStartY = 0;
+
+snakeScreen.addEventListener("touchstart", e => {
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+}, { passive: true });
+
+snakeScreen.addEventListener("touchend", e => {
+    if (!running) return;
+
+    const touch = e.changedTouches[0];
+    const diffX = touch.clientX - touchStartX;
+    const diffY = touch.clientY - touchStartY;
+
+    // Evitar toques pequeños
+    if (Math.abs(diffX) < 30 && Math.abs(diffY) < 30) return;
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        // Horizontal
+        if (diffX > 0 && dx === 0) { dx = 1; dy = 0; }      // derecha
+        if (diffX < 0 && dx === 0) { dx = -1; dy = 0; }    // izquierda
+    } else {
+        // Vertical
+        if (diffY > 0 && dy === 0) { dx = 0; dy = 1; }     // abajo
+        if (diffY < 0 && dy === 0) { dx = 0; dy = -1; }    // arriba
+    }
+}, { passive: true });
+
+
+const nameScreen = document.getElementById("name-screen");
+const nameInput = document.getElementById("player-name");
+const nameOk = document.getElementById("name-ok");
+
+let playerName = "";
+let personalBest = 0;
+let hasPlayer = false; // 👈 CLAVE
+
+openGameBtn.onclick = () => {
+
+    // 👉 Si YA hay jugador, entra directo al juego
+    if (hasPlayer) {
+        document.body.classList.add("no-scroll");
+        snakeScreen.style.display = "flex";
+
+        resizeCanvas();
+        initGame();
+        draw();
+
+        playOverlay.style.display = "flex";
+        pauseBtn.style.display = "none";
+        return;
+    }
+
+    // 👉 Si NO hay jugador, pedir nombre
+    nameScreen.style.display = "flex";
+};
+
+
+nameOk.onclick = () => {
+    if (!nameInput.value.trim()) return;
+
+    playerName = nameInput.value.trim();
+    nameHud.textContent = playerName;
+
+    personalBest = 0;
+    hasPlayer = true;
+
+    document.getElementById("record-name").textContent = playerName;
+    document.getElementById("record-score").textContent = 0;
+
+    nameScreen.style.display = "none";
+    introScreen.style.display = "flex";
+
+    drawIntroBackground(); // 👈 fondo animado
+};
+
+
+introScreen.onclick = () => {
+    introScreen.style.display = "none";
+
+    document.body.classList.add("no-scroll");
+    snakeScreen.style.display = "flex";
+
+    resizeCanvas();
+    initGame();
+    draw();
+
+    playOverlay.style.display = "flex";
+    pauseBtn.style.display = "none";
+};
+
+
+
+
+const size = 20;
+let snake, food, dx, dy, score;
+let interval = null;
+let running = false;
+let paused = false;
+
+
+let speed = 280;          // 👈 velocidad inicial (MUY lenta)
+const minSpeed = 90;      // 👈 límite máximo de dificultad
+const speedStep = 15;     // 👈 cuanto acelera cada vez
+
+
+
+
+
+
+
+document.querySelectorAll(".close-modal").forEach(btn => {
+    btn.onclick = () => {
+        nameModal.style.display = "none";
+    };
+});
+
+
+
+
+
+
+
+
+
+
+
+/* ===== PLAY / PAUSE ===== */
+playBtn.onclick = () => {
+
+    // Si el juego está detenido (inicio o game over)
+    if (!running && !paused) {
+        if (dx === 0 && dy === 0) {
+            dx = 1;
+            dy = 0;
+        }
+        startGame();
+    }
+
+    // Si estaba pausado → reanudar
+    if (paused) {
+        paused = false;
+        startGame();
+    }
+
+    playOverlay.style.display = "none";
+    pauseBtn.style.display = "block";
+};
+
+
+
+pauseBtn.onclick = () => {
+    if (!running) return;
+
+    paused = true;
+    pauseGame();
+
+    pauseBtn.style.display = "none";
+    playOverlay.style.display = "flex";
+};
+
+
+resumeBtn.onclick = () => {
+    pauseModal.style.display = "none";
+    startGame();
+};
+
+menuBtn.onclick = () => {
+    pauseModal.style.display = "none";
+    snakeScreen.style.display = "none";
+    document.body.classList.remove("no-scroll");
+
+    stopGame();
+    playOverlay.style.display = "none";
+};
+
+
+function startGame() {
+    if (running) return;
+    running = true;
+    paused = false;
+    interval = setInterval(loop, speed);
+}
+
+
+
+
+function pauseGame() {
+    running = false;
+    clearInterval(interval);
+}
+
+
+
+function stopGame() {
+    running = false;
+    paused = false;
+    clearInterval(interval);
+}
+
+
+/* ===== INICIO ===== */
+function initGame() {
+    snake = [{ x: 5, y: 5 }];
+    dx = 0; dy = 0;
+    score = 0;
+    speed = 280; // 👈 reset velocidad
+    updateScore();
+    food = randomFood();
+    draw();
+}
+
+
+/* ===== LOOP ===== */
+function loop() {
+    move();
+    draw();
+}
+
+/* ===== MOVIMIENTO ===== */
+function move() {
+    const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+    // Colisiones
+    if (
+        head.x < 0 || head.y < 0 ||
+        head.x >= canvas.width / size ||
+        head.y >= canvas.height / size ||
+        snake.some(p => p.x === head.x && p.y === head.y)
+    ) {
+        gameOver();
+        return;
+    }
+
+    snake.unshift(head);
+
+    // 🍎 COMER
+    if (head.x === food.x && head.y === food.y) {
+        score++;
+        updateScore();
+        food = randomFood();
+
+        if (score % 3 === 0 && speed > minSpeed) {
+            speed -= speedStep;
+            clearInterval(interval);
+            interval = setInterval(loop, speed);
+        }
+    } else {
+        // ⛔ NO come → quitar cola
+        snake.pop();
+    }
+}
+
+
+/* ===== DIBUJO ===== */
+function draw() {
+    ctx.fillStyle = "#000";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+// 🟩 cuadrícula de carriles
+drawGrid();
+
+
+    // comida
+    ctx.fillStyle = "#ff00ff";
+    ctx.fillRect(food.x * size, food.y * size, size, size);
+
+    // serpiente
+    ctx.fillStyle = "#00ff00";
+    snake.forEach(p =>
+        ctx.fillRect(p.x * size, p.y * size, size, size)
+    );
+}
+
+function drawGrid() {
+    ctx.strokeStyle = "#006600"; // verde oscuro retro
+    ctx.lineWidth = 1;
+
+    for (let x = 0; x <= canvas.width; x += size) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+    }
+
+    for (let y = 0; y <= canvas.height; y += size) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+    }
+}
+
+
+/* ===== COMIDA ===== */
+function randomFood() {
+    return {
+        x: Math.floor(Math.random() * (canvas.width / size)),
+        y: Math.floor(Math.random() * (canvas.height / size))
+    };
+}
+
+/* ===== SCORE ===== */
+function updateScore() {
+    document.getElementById("snake-score").textContent = score;
+}
+
+function gameOver() {
+    stopGame();
+
+    const newRecordMsg = document.getElementById("new-record");
+    newRecordMsg.style.display = "none";
+
+    // 🏆 SOLO si se SUPERA el récord
+    if (score > personalBest) {
+        personalBest = score;
+
+        document.getElementById("record-name").textContent = playerName;
+        document.getElementById("record-score").textContent = personalBest;
+
+        newRecordMsg.style.display = "block";
+    }
+
+    document.getElementById("final-score").textContent = score;
+    gameOverScreen.style.display = "flex";
+}
+
+
+
+
+
+
+
+
+/* ===== TECLADO (PC) ===== */
+document.addEventListener("keydown", e => {
+    if (!running) return;
+    if (e.key === "ArrowUp" && dy === 0) { dx = 0; dy = -1; }
+    if (e.key === "ArrowDown" && dy === 0) { dx = 0; dy = 1; }
+    if (e.key === "ArrowLeft" && dx === 0) { dx = -1; dy = 0; }
+    if (e.key === "ArrowRight" && dx === 0) { dx = 1; dy = 0; }
+});
+
+/* ===== CANVAS ===== */
+function resizeCanvas() {
+    const topHeight = document.querySelector(".snake-top").offsetHeight;
+    const bottomMargin = 40; // 👈 margen inferior de seguridad
+
+    canvas.width = Math.floor(window.innerWidth / size) * size;
+    canvas.height = Math.floor(
+        (window.innerHeight - topHeight - bottomMargin) / size
+    ) * size;
+}
+
+
+
+
+
+
+
+
+
+});
+
+
+
+
+
+</script>
+
+
+
+
+<!-- MODAL NOMBRE -->
+<div id="name-info-modal" class="info-modal">
+  <div class="info-box">
+    <span class="close-modal">✖</span>
+    <h3>ESTE ES TU NOMBRE</h3>
+    <p id="player-name-modal"></p>
+  </div>
+</div>
+
+
+
+
+</body>
+</html>
